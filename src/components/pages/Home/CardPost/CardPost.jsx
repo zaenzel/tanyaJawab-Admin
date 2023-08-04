@@ -7,7 +7,7 @@ const CardPost = ({ posts }) => {
   const { id, title, question, created_at, id_category, id_answer } = posts;
 
   return (
-    <Link to={`/post/${id}`}>
+    <Link to={`/post/${id}`} className="w-full flex justify-center">
       <Card className="w-72 sm:w-full max-w-xl lg:max-w-4xl hover:bg-slate-50">
         <div className="flex justify-between gap-5">
           <div className="flex flex-col gap-1">

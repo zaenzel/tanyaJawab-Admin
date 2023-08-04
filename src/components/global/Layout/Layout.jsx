@@ -6,7 +6,7 @@ const Layout = ({ children }) => {
   return (
     <div className="flex flex-col justify-center">
       <DefaultNavbar />
-      <div className="flex max-w-4xl w-full justify-center p-5 mx-auto min-h-[calc(100vh_-_8rem)]">
+      <div className="flex max-w-5xl w-full justify-center p-5 mx-auto min-h-[calc(100vh_-_8rem)]">
         {children}
       </div>
       <DefaultFooter />

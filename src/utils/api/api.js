@@ -4,8 +4,10 @@ import useSWR from "swr";
 const fetcher = (url) => axios.get(url).then((res) => res);
 const api_base_url = import.meta.env.VITE_BASE_URL_API;
 
-export function getPosts() {
-  const { data, error, isLoading } = useSWR(`${api_base_url}/posts`, fetcher);
+export function getPosts(categoryId) {
+  const { data, error, isLoading } = categoryId
+    ? useSWR(`${api_base_url}/posts?category_id=${categoryId}`, fetcher)
+    : useSWR(`${api_base_url}/posts`, fetcher);
 
   return {
     posts: data,
@@ -36,6 +38,19 @@ export function addAnswer(id_answer, answer, id_posts) {
 }
 
 export function deletePost(id) {
-  const res = axios.delete(`${api_base_url}/posts/${id}`)
-  return res
+  const res = axios.delete(`${api_base_url}/posts/${id}`);
+  return res;
+}
+
+export function getCategory() {
+  const { data, error, isLoading } = useSWR(
+    `${api_base_url}/category`,
+    fetcher
+  );
+
+  return {
+    category: data,
+    isLoadingCat: isLoading,
+    isErrorCat: error,
+  };
 }
