@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DefaultFooter from "./DefaultFooter/DefaultFooter";
 import DefaultNavbar from "./DefaultNavbar/DefaultNavbar";
 
 const Layout = ({ children }) => {
+
   return (
     <div className="flex flex-col justify-center">
       <DefaultNavbar />

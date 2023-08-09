@@ -10,6 +10,7 @@ import DefaultModal from "../../global/Modal/DefaultModal";
 import { Button } from "flowbite-react";
 import ModalDelete from "../../global/Modal/ModalDelete";
 import ScreenLoading from "../../global/Loading/ScreenLoading";
+import category from "../../../utils/category";
 
 const Detail = () => {
   const { postId } = useParams();
@@ -28,15 +29,16 @@ const Detail = () => {
     e.preventDefault();
 
     try {
-      const res = await addAnswer(1, answer, postId);
+      const res = await addAnswer("Juniardi, Lc", answer, postId);
       if ((res.status = 200)) {
-        setOpenModal(res?.data.message);
+        setOpenModal("Berhasil mengirim jawaban");
       }
       setTimeout(() => {
         navigate("/");
       }, 2000);
     } catch (error) {
-      errSet(error?.response?.data?.message);
+      // errSet(error?.response?.message);
+      console.log(error)
       setOpenModal(true);
     }
   };
@@ -46,13 +48,14 @@ const Detail = () => {
     try {
       const res = await deletePost(postId);
       if (res.status === 200) {
-        setOpenModal(res?.data.message);
+        setOpenModal("Berhasil menghapus pertanyaan");
       }
       setTimeout(() => {
         navigate("/");
       }, 2000);
     } catch (error) {
-      errSet(error?.response?.data?.message);
+      // errSet(error?.response?.data?.message);
+      console.log(error)
     }
   };
 
@@ -70,22 +73,24 @@ const Detail = () => {
     <div className="flex flex-col gap-y-14 py-10">
       <div className="flex flex-col w-full gap-4">
         <h1 className="text-3xl lg:text-5xl font-semibold">
-          {posts?.data?.data.title}
+          {posts?.data.title}
         </h1>
-        <p>Lain - lain, {date(posts?.data?.data.created_at)}</p>
+        <p className="text-gray-500 flex flex-col sm:flex-row gap-2 sm:gap-5">
+          {posts?.data.category},{" "}
+          <span>{date(posts?.data.created_at)}</span>
+        </p>
       </div>
       <DetailText
-        text={posts?.data?.data.question}
-        name={posts?.data?.questioner.name}
-        city={posts?.data?.questioner.city}
+        text={posts?.data.question}
+        name={posts?.data.questioner}
+        city={posts?.data.city}
       />
-      {posts?.data?.answer ? (
+      {posts?.data.answer ? (
         <div className="flex flex-col gap-10">
           <DetailText
             question={false}
-            text={posts?.data?.data.answer}
-            name={posts?.data?.answer.name}
-            city={posts?.data?.answer.city}
+            text={posts?.data.answer}
+            name={posts?.data.answered}
           />
           <Button type="button" outline onClick={() => modalDeleteSet(true)}>
             Hapus Pertanyaan
@@ -129,7 +134,6 @@ const Detail = () => {
       />
 
       <div>{isError ? error : isLoading ? loading : success}</div>
-     
     </Layout>
   );
 };

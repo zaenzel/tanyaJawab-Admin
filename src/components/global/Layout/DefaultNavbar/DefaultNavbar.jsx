@@ -12,21 +12,9 @@ const DefaultNavbar = () => {
             src="/images/logo.png"
           />
         </Navbar.Brand>
-        <Button color="light" className="flex text-white hover:text-primary">
+        <Button color="light" className="flex text-white hover:text-primary" onClick={e => localStorage.removeItem("user")}>
           Logout
         </Button>
-        {/* <Navbar.Toggle className="hidden text-white hover:text-primary" />
-      <Navbar.Collapse className="hidden">
-        <Navbar.Link active href="#">
-          <p>Home</p>
-        </Navbar.Link>
-        <Navbar.Link href="#">
-          <p>About</p>
-        </Navbar.Link>
-        <Navbar.Link href="#">Services</Navbar.Link>
-        <Navbar.Link href="#">Pricing</Navbar.Link>
-        <Navbar.Link href="#">Contact</Navbar.Link>
-      </Navbar.Collapse> */}
       </Navbar>
     </div>
   );
